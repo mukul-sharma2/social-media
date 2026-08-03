@@ -1,0 +1,151 @@
+/* Background Overlay */
+.cover {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 99998;
+}
+
+/* Create Post Modal */
+.CreatePostMenue {
+    position: fixed;
+    z-index: 99999;
+
+    width: 80%;
+    max-width: 700px;
+    height: 90vh;
+
+    background: #fff;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    overflow-y: auto;
+}
+
+/* Close Button */
+.cross,
+.cross:hover {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background: transparent;
+    border: none;
+
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+
+    cursor: pointer;
+}
+
+/* Heading */
+.CreatePostMenue h1 {
+    margin: 0;
+    padding-bottom: 15px;
+
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+
+    border-bottom: 1px solid #ddd;
+}
+
+/* Username */
+.username {
+    margin: 10px 0 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* Placeholder Text */
+.placeholder {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+}
+
+/* Textarea/Input */
+.CreatePostMenue textarea,
+.CreatePostMenue input[type="text"] {
+    width: 100%;
+    min-height: 180px;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+    resize: vertical;
+
+    outline: none;
+    box-sizing: border-box;
+}
+
+.CreatePostMenue textarea:focus,
+.CreatePostMenue input[type="text"]:focus {
+    border-color: #1877f2;
+}
+
+/* File Input */
+.CreatePostMenue input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #bbb;
+    border-radius: 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* Post Button */
+.post-btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .CreatePostMenue {
+        width: 95%;
+        height: 95vh;
+        padding: 15px;
+    }
+
+    .CreatePostMenue h1 {
+        font-size: 24px;
+    }
+
+    .username {
+        font-size: 16px;
+    }
+
+    .placeholder {
+        font-size: 14px;
+    }
+
+    .CreatePostMenue textarea,
+    .CreatePostMenue input[type="text"] {
+        min-height: 150px;
+    }
+
+    .cross,
+    .cross:hover {
+        font-size: 22px;
+        top: 10px;
+        right: 10px;
+    }
+}

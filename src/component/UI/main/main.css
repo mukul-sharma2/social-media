@@ -1,0 +1,38 @@
+main {
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+main::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+main {
+    position: fixed;
+    left: 20%;    right: 25%;
+    top: 60px;
+    height: calc(100vh - 60px);
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* Center horizontally */
+    justify-content: flex-start; /* Start from the top */
+    padding: 20px 0;
+    gap: 20px;
+}
+@media (max-width: 768px) {
+    main {
+         
+        left: 0;
+        right: 0;
+        top: 60px;
+        bottom: 70px;          
+        height: auto;          
+        width: auto;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+}
