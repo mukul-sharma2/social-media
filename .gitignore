@@ -7,22 +7,84 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+jspm_packages/
+bower_components/
+
+# Build/output
+dist/
+dist-ssr/
+build/Release
+.next/
+out/
+.nuxt/
+.output/
+.cache/
+.parcel-cache/
+web_modules/
+.vuepress/dist
+.svelte-kit/
+**/.vitepress/dist
+.docusaurus
+.serverless/
+.fusebox/
+.dynamodb/
+.vite/
+.astro/
+.turbo
+
+# Environment files
+.env
+.env.*
+!.env.example
 *.local
+
+# Coverage
+coverage/
+*.lcov
+.nyc_output
+lib-cov
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.vscode-test/
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
 *.zip
-.env
 
+# TypeScript
+*.tsbuildinfo
+
+# Package manager files
+.npm
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+.pnpm-store
+.yarn-integrity
+*.tgz
+
+# ESLint / Stylelint
+.eslintcache
+.stylelintcache
+
+# Other caches/config
+.grunt
+.lock-wscript
+.node_repl_history
+.tern-port
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+*.pid
+*.seed
+*.pid.lock
