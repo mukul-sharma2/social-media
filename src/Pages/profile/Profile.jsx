@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 function Profile() {
   const [posts, setPosts] = useState([]);
   const[user,setUser]=useState({});
-
+  const[showEdit, setShowedit] = useState(false)
   useEffect(() => {
     apiRequest("/my_posts", "GET" )
       .then((data) => {
@@ -65,8 +65,10 @@ function Profile() {
             </div>
           </div>
 
-          <button className="edit_btn">Edit Profile</button>
-          <Edit_profile/>
+          <button className="edit_btn" onClick={() => setShowedit(true)}>
+            Edit Profile
+          </button>
+          {showEdit && <Edit_profile onClose={() => setShowedit(false)} />}
         </div>
       </div>
       <div className="posts">

@@ -31,6 +31,7 @@ function Leftbar() {
             to="/notification"
             className={({ isActive }) => isActive ? "active" : ""}
           >
+            
             <FaBell className="image"/> <p>Notifications</p>
           </NavLink>
         </li>

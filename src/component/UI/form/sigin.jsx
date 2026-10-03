@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../Button/Button";
+import Button from "../button/Button";
 import Input from "../input/input";
 import { signup } from "../../js_functions/login";
 import { useNavigate } from "react-router-dom";

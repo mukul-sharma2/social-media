@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import datetime
 import jwt
 from bson import ObjectId, objectid
-from streamlit import user
+# from streamlit import user
 from app.Auth.login_required import login_required
 import os
 import uuid
@@ -21,7 +21,7 @@ posts = db['posts']
 UPLOAD_FOLDER = "uploads"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
+ 
 app.config["SECRET_KEY"] = "your_super_secret_key"
 try:
     client.server_info()

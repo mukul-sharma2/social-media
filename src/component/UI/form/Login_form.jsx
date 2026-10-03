@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button from "../button/Button";
 import Input from "../input/input";
 import "./login_form.css";
 import { useState } from "react";

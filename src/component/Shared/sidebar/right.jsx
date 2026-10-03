@@ -1,6 +1,6 @@
 import './right.css'
 
-import Button from '../../UI/button/button'
+import Button from '../../UI/button/Button'
 
 function Rightbar(){
 return(
@@ -20,9 +20,9 @@ return(
         </div>
         <div className="card">
             <h3>Activity</h3>
-            <p>💖like</p>
-            <p>💬Comments</p>
-            <p>📭Post</p>
+            <p>like</p>
+            <p>Comments</p>
+            <p>Post</p>
         </div>
     </div>
 )

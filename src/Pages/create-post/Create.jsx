@@ -1,5 +1,5 @@
 import "./create.css";
-import Button from "../../component/UI/button/button";
+import Button from "../../component/UI/button/Button";
 import Input from "../../component/UI/input/input";
 import { useState } from "react";
 
@@ -9,13 +9,14 @@ function CreatePost({ onClose ,user}) {
   const [Discription , setDiscription] = useState('')
   const [file , setFile] = useState(null)
   
-  
+
   async function add_post(title, description, file, token) {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
     formData.append('file', file);
     if (!file) {
+
   alert("Please select a file");
   return;
 }
