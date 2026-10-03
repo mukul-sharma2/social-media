@@ -8,6 +8,7 @@ import Home from "./Pages/Home/Home";
 import Button from "./component/UI/button/Button";
 import CreatePost from "./Pages/create-post/Create";
 import Profile from "./Pages/profile/Profile";
+import Inbox from "./Pages/messages/inbox";
 
 function App() {
   const [showCreate, setShowCreate] = useState(false);
@@ -35,7 +36,15 @@ function App() {
               </>
             }
           />
-
+          <Route
+            path="/messages"
+            element={
+              <>
+                <Navbar />
+                <Inbox />
+              </>
+            }
+          />
           <Route
             path="/profile"
             element={
@@ -45,6 +54,7 @@ function App() {
               </>
             }
           />
+
         </Routes>
       </Suspense>
 

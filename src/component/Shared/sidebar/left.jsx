@@ -9,9 +9,17 @@ import {
   FaCog,
   FaSignOutAlt
 } from "react-icons/fa";
+import { useState } from "react";
 import './left.css'
 
+
 function Leftbar() {
+  const [isChatListOpen, setIsChatListOpen] = useState(false);
+
+  const toggleChatList = () => {
+    setIsChatListOpen(!isChatListOpen);
+  };
+
   return (
     <div className="leftbar">
       <ul>

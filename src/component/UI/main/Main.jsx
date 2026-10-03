@@ -2,7 +2,6 @@ import "./main.css";
 import { useEffect, useState } from "react";
 
 import PostCard from "../post-card/PostCard";
-import Button from "../button/Button";
 import { apiRequest } from "../../js_functions/api";
 
 function Main() {

@@ -1,9 +1,6 @@
-import Leftbar from "../../component/Shared/sidebar/left";
-
-import Rightbar from '../../component/Shared/sidebar/right';
+import Leftbar from "../../component/Shared/sidebar/Left";
+import Rightbar from "../../component/Shared/sidebar/Right";
 import Main from "../../component/UI/main/Main";
-
-
 function Home() {
   
   return (
