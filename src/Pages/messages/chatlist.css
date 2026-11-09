@@ -1,0 +1,132 @@
+.chatlist {
+    position: fixed;
+    left: 20%;
+    top: 60px;
+    width: 80%;
+    height: calc(100vh - 60px);
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.chatlist::-webkit-scrollbar {
+    display: none;
+}
+
+/* Chat list sidebar */
+.chatlist .list {
+    flex: 0 0 35%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+/* Chat conversation area */
+.chatlist .chat {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding: 20px;
+    gap: 20px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+/* Chat list */
+.chatlist ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.chatlist ul li {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+
+    border-bottom: 1px solid #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chatlist ul li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Profile image */
+.chatlist ul li .profile {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .chatlist {
+        left: 0;
+        top: 60px;
+        bottom: 70px;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        gap: 10px;
+        overflow-y: auto;
+    }
+
+    .chatlist .list {
+        flex: 1;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .chatlist .chat {
+        display: none;
+    }
+
+    /* Show the conversation when a chat is selected */
+    .chatlist.show-chat .list {
+        display: none;
+    }
+
+    .chatlist.show-chat .chat {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .chatlist ul li .profile {
+        width: 32px;
+        height: 32px;
+        margin-right: 8px;
+    }
+}

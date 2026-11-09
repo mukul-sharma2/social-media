@@ -1,13 +1,27 @@
-from flask import Flask, request, jsonify, current_app , g
+from flask import (
+    Flask, request, jsonify, current_app, g,
+    send_from_directory
+)
+
 from flask_cors import CORS
+from flask_socketio import SocketIO, emit, join_room, leave_room
+
 from pymongo import MongoClient
+from bson import ObjectId
+from bson.errors import InvalidId
+
+from werkzeug.security import (
+    generate_password_hash,
+    check_password_hash
+)
+
 import datetime
 import jwt
-from bson import ObjectId, objectid
-# from streamlit import user
-from app.Auth.login_required import login_required
 import os
+
 import uuid
+
+from app.Auth.login_required import login_required
 
 
 
@@ -17,6 +31,15 @@ CORS(app)
 client = MongoClient("mongodb://localhost:27017/")
 db = client["mydatabase"]
 collection = db["users"]
+socketio = SocketIO(
+    app,
+    cors_allowed_origins=[
+        "http://localhost:5173"
+    ],
+    async_mode="threading"
+)
+messages = db['messages']
+conversations = db['conversations']
 posts = db['posts']
 UPLOAD_FOLDER = "uploads"
 
@@ -38,7 +61,12 @@ def signup():
     data = request.get_json()
     name = data.get("name")
     email = data.get("email")
+    email = data.get('email', '').strip().lower()
     password = data.get("password")
+    print("SIGNUP DATA:", data)
+    if not email or not password:
+
+        return jsonify({"message": "Email and password are required"}), 400
     if collection.find_one({'email': email}) :
         return jsonify(
             {
@@ -47,19 +75,26 @@ def signup():
                 
             }
         ),400
-    collection.insert_one(
-        {'name':name,
-            'email':email,
-            'password':password}
-        )
+    hashed_password = generate_password_hash(password)
+    result = collection.insert_one({
+        "name": name,
+        "email": email,
+        "password": hashed_password
+    })
     
     payload = {
         "email": email,
         "name": name,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=2)
+        "user_id": str(result.inserted_id),
+        "exp": datetime.datetime.now(datetime.timezone.utc)
+               + datetime.timedelta(hours=2)
     }
     
-    token = jwt.encode(payload, current_app.config["SECRET_KEY"], algorithm="HS256")    
+    token = jwt.encode(
+        payload,
+        current_app.config["SECRET_KEY"],
+        algorithm="HS256"
+    )
         
         
     print(name , email , password)
@@ -70,8 +105,6 @@ def signup():
         "token": token
     }), 201
     
-    
-from flask import send_from_directory
 
 UPLOAD_FOLDER = "uploads"
 
@@ -89,11 +122,13 @@ def login():
         "password": password
     })
 
-    if not user:
+    if not user or not check_password_hash(
+        user["password"], password
+    ):
         return jsonify({
-         "success": False,
+            "success": False,
             "message": "Invalid email or password"
-    }), 401
+        }), 401
     
         
         
@@ -142,7 +177,16 @@ def add_post():
         "description": description or None,
         "image": filename,
         "created_at": datetime.datetime.utcnow()
-        
+
+
+
+
+
+
+
+
+
+
 })
 
     return jsonify({
@@ -205,5 +249,13 @@ def feed():
 def get_user():
     
    return jsonify(g.user), 200
+
+
+@app.route('/api/friends', methods=['GET'])
+@login_required()
+def get_friends():
+    return jsonify(g.user.get("friends", [])), 200
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, debug=True, port=5000)
