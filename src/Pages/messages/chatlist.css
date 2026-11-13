@@ -1,58 +1,74 @@
+
+/* =================================
+   MAIN CHAT CONTAINER
+================================= */
+
 .chatlist {
     position: fixed;
     left: 20%;
     top: 60px;
     width: 80%;
     height: calc(100vh - 60px);
-    box-sizing: border-box;
 
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: flex-start;
-    gap: 20px;
 
+    gap: 20px;
     padding: 20px;
-    overflow-y: auto;
+
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Hide scrollbar */
+
+.chatlist::-webkit-scrollbar,
+.messages::-webkit-scrollbar,
+.chatlist .list::-webkit-scrollbar {
+    display: none;
+}
+
+.chatlist,
+.messages,
+.chatlist .list {
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
-.chatlist::-webkit-scrollbar {
-    display: none;
-}
 
-/* Chat list sidebar */
+/* =================================
+   CHAT LIST SIDEBAR
+================================= */
+
 .chatlist .list {
     flex: 0 0 35%;
     min-width: 0;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+
     gap: 20px;
     padding: 20px 0;
+
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
-/* Chat conversation area */
-.chatlist .chat {
-    flex: 1;
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-
-    padding: 20px;
-    gap: 20px;
-    box-sizing: border-box;
-    border-radius: 15px;
+.chatlist .list h1 {
+    width: 100%;
+    margin: 0;
+    text-align: center;
 }
 
-/* Chat list */
+
+/* =================================
+   CHAT LIST ITEMS
+================================= */
+
 .chatlist ul {
     list-style: none;
     padding: 0;
@@ -61,72 +77,360 @@
 }
 
 .chatlist ul li {
-    box-sizing: border-box;
     width: 100%;
     min-height: 60px;
-    padding: 10px;
+
+    padding: 10px 15px;
 
     display: flex;
     align-items: center;
 
+    box-sizing: border-box;
+
     border-bottom: 1px solid #ccc;
     border-radius: 15px;
+
     cursor: pointer;
-    transition: background-color 0.3s;
+
+    transition: background-color 0.3s ease;
 }
 
 .chatlist ul li:hover {
     background-color: #f0f0f0;
 }
 
-/* Profile image */
+/* Active selected chat */
+
+.chatlist ul li.active {
+    background-color: #e8f0fe;
+}
+
+
+/* =================================
+   PROFILE IMAGES
+================================= */
+
 .chatlist ul li .profile {
     width: 40px;
     height: 40px;
+
     flex-shrink: 0;
     object-fit: cover;
+
     border-radius: 50%;
     margin-right: 15px;
 }
 
-/* Mobile layout */
+.chatlist .chat .profile {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* =================================
+   CHAT CONVERSATION AREA
+================================= */
+
+.chatlist .chat {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+    justify-content: flex-start;
+
+    padding: 20px;
+    gap: 10px;
+
+    box-sizing: border-box;
+    border-radius: 15px;
+
+    background-color: #fafafa;
+
+    overflow: hidden;
+}
+
+/* Inner chat wrapper */
+
+.chatlist .chat > div {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+
+    width: 100%;
+}
+
+
+/* =================================
+   CHAT HEADER
+================================= */
+
+.chatnav {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+    height: 60px;
+
+    flex-shrink: 0;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    background-color: #f5f5f5;
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+}
+
+.chatnav h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+/* =================================
+   MESSAGES SECTION
+================================= */
+
+.messages {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    min-height: 0;
+    min-width: 0;
+
+    width: 100%;
+
+    padding: 15px;
+    margin: 0 0 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    background-color: #fff;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Individual message */
+
+.message {
+    width: fit-content;
+    max-width: 70%;
+
+    padding: 10px 15px;
+    margin: 8px 0;
+
+    background-color: #dcf8c6;
+
+    border-radius: 12px;
+
+    overflow-wrap: anywhere;
+}
+
+.message p {
+    margin: 0;
+}
+
+
+/* =================================
+   INPUT CONTAINER
+================================= */
+
+.input-container {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    flex-shrink: 0;
+
+    padding: 5px 0;
+    box-sizing: border-box;
+}
+
+.input-container input {
+    flex: 1;
+    min-width: 0;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-container input:focus {
+    border-color: #4285f4;
+}
+
+.input-container button {
+    flex-shrink: 0;
+}
+
+
+/* =================================
+   MOBILE RESPONSIVE LAYOUT
+================================= */
+
 @media (max-width: 768px) {
+
     .chatlist {
         left: 0;
         top: 60px;
+
         bottom: 70px;
+
         width: 100%;
         height: auto;
+
         padding: 10px;
         gap: 10px;
-        overflow-y: auto;
+
+        overflow: hidden;
     }
+
+    /* Chat list */
 
     .chatlist .list {
         flex: 1;
         width: 100%;
+        height: 100%;
+
         padding: 10px 0;
     }
+
+    /* Hide chat by default */
 
     .chatlist .chat {
         display: none;
     }
 
-    /* Show the conversation when a chat is selected */
+    /* Hide list when chat selected */
+
     .chatlist.show-chat .list {
         display: none;
     }
 
+    /* Show conversation */
+
     .chatlist.show-chat .chat {
         display: flex;
+
         flex: 1;
         width: 100%;
+        height: 100%;
+        min-height: 0;
+
         padding: 10px;
     }
+
+    /* Profile */
 
     .chatlist ul li .profile {
         width: 32px;
         height: 32px;
+
         margin-right: 8px;
+    }
+
+    .chatlist .chat .profile {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Chat header */
+
+    .chatnav {
+        height: 55px;
+        margin-bottom: 5px;
+    }
+
+    .chatnav h2 {
+        font-size: 18px;
+    }
+
+    /* Messages */
+
+    .messages {
+        flex: 1;
+        min-height: 0;
+        max-height: none;
+
+        padding: 10px;
+    }
+
+    /* Message */
+
+    .message {
+        max-width: 85%;
+    }
+
+    /* Input */
+
+    .input-container {
+        gap: 8px;
+    }
+}
+
+
+/* =================================
+   SMALL MOBILE SCREENS
+================================= */
+
+@media (max-width: 480px) {
+
+    .chatlist {
+        padding: 8px;
+    }
+
+    .chatlist .list h1 {
+        font-size: 22px;
+    }
+
+    .chatlist ul li {
+        min-height: 55px;
+        padding: 8px;
+    }
+
+    .chatlist .chat {
+        padding: 8px;
+    }
+
+    .chatnav h2 {
+        font-size: 17px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .input-container input {
+        padding: 10px;
     }
 }

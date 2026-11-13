@@ -256,6 +256,11 @@ def get_user():
 def get_friends():
     return jsonify(g.user.get("friends", [])), 200
 
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+    
+
 
 if __name__ == "__main__":
     socketio.run(app, debug=True, port=5000)

@@ -1,6 +1,7 @@
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import socket from "./socket";
 
 import Login_page from "./Pages/login";
 import Navbar from "./component/Shared/navbar/Navbar";
@@ -12,6 +13,21 @@ import Inbox from "./Pages/messages/inbox";
 
 function App() {
   const [showCreate, setShowCreate] = useState(false);
+
+  useEffect(() => {
+  socket.on("connect", () => {
+    console.log("Socket connected:", socket.id);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected");
+  });
+
+  return () => {
+    socket.off("connect");
+    socket.off("disconnect");
+  };
+}, []);
 
   return (
     <>
